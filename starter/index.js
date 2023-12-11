@@ -173,7 +173,7 @@ console.log(sum)
 //   console.log(finances[0][1]); // read from nested arrays
 // })
 
-// Go for the conceptually easier for loop
+// Go for the conceptually easier for loop <<====================
 
 // create an array
 // let myNums = [1, 2, 3, 4, 5];
@@ -181,10 +181,25 @@ console.log(sum)
 // create a variable for the sum and initialize it
 let periodNetPL = 0;
 
-// iterate over each item in the array
+// iterate over each item in the array and add to summary variable show index to check function
 for (let i = 0; i < finances.length; i++ ) {
   periodNetPL += finances[i][1];
-  console.log(periodNetPL, i+1) 
+  console.log(periodNetPL, i) 
 }
 
+// now to think about calculating deltas using previous and current indexes starting at one 
 
+// delta = current month P/L less previous month P/L
+
+let delta = 0;
+
+//loop here 
+
+// finances[i][1] - finances[i-1][1] // works as we start from item one!
+// log date finances[i][0] and delta 
+
+for (let i = 1; i < finances.length; i++ ) {
+  // periodNetPL += finances[i][1];
+  delta = finances[i][1] - finances[i-1][1]
+  console.log(i + " " + finances[i][0] + " " + delta ) 
+}
