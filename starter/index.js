@@ -181,11 +181,12 @@ console.log(sum)
 // create a variable for the sum and initialize it
 let periodNetPL = 0;
 
-// iterate over each item in the array and add to summary variable show index to check function
+/* iterate over each item in the array and add to summary variable show index to check function
 for (let i = 0; i < finances.length; i++ ) {
   periodNetPL += finances[i][1];
   console.log(periodNetPL, i) 
 }
+*/
 
 // now to think about calculating deltas using previous and current indexes starting at one 
 
@@ -199,7 +200,20 @@ let delta = 0;
 // log date finances[i][0] and delta 
 
 for (let i = 1; i < finances.length; i++ ) {
-  // periodNetPL += finances[i][1];
+  periodNetPL += finances[i][1];
   delta = finances[i][1] - finances[i-1][1]
-  console.log(i + " " + finances[i][0] + " " + delta ) 
+  console.log(i + ", " + finances[i][0] + ", " + finances[i][1] + ", " + finances[i-1][1] + ", " + delta ) 
 }
+
+
+// Looking good but not formally sanity checked
+
+// Provisional output 
+
+console.log("Results table \n -----------")
+console.log("Overall " + periodNetPL)
+console.log("Number of months will be array length " + finances.length)
+
+
+// Sharp idea - output a comma-separated list to load into spreadsheet for sanity check. Also start using the nice template output system.
+
