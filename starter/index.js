@@ -211,9 +211,9 @@ for (let i = 1; i < finances.length; i++ ) {
 // Provisional output 
 
 console.log("Results table \n -----------")
-console.log("Overall " + periodNetPL)
+console.log("Overall " + periodNetPL) //error here as misses january off - don't use value from loop here with start at one change variable name
 console.log("Number of months will be array length " + finances.length)
 
 
-// Sharp idea - output a comma-separated list to load into spreadsheet for sanity check. Also start using the nice template output system.
+// Sharp idea - output a comma-separated list to load into spreadsheet for sanity check. Also start using the nice template output system. Well good, helped find boundary errors.
 
