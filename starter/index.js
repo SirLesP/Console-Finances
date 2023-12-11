@@ -86,3 +86,46 @@ var finances = [
   ['Jan-2017', 138230],
   ['Feb-2017', 671099],
 ];
+
+/* Outline:
+The given dataset is provided as a nested array of key-value pairs comprising a text string and a number. The text string is a date in the form "Mon-Year" and the number, assumed to be an integer being the monthy profit or loss. Profit positive, losses negative
+
+We are required to find: 
+  The total number of months in the given dataset.
+    This will be given by the length of the array (watch for boundary conditions and zero indexing).
+  The net total of P/L over the entire period.
+    A quick glance suggests the full total of all the numeric fields gives this! 
+  The average of changes in the P/L amounts over the whole period.
+    A two stage process suggested in the README:
+      Track the changes in P/L from month to month (delta).
+      Find the average of those changes (Total {of deltas}/(Number of months - 1)).
+        Note there is a boundary condition, the first value has no known delta as we don't have the previous month's figure, hence the -1 above.
+      Find the greatest increase in P/L (date and amount) over the period.
+      Find the greatest decrease .........................................
+
+      Console output is acceptable, that's all the given index.html would provide!
+
+      Financial Analysis
+      ------------------
+      Total Months:
+      Total P/L: £
+      Average Change: 
+      Greatest Increase in P/L: 'date0 string' £ **** Do not use brackets ****
+      Greatest Decrease in P/L: 'date0 string' £ **** Do not use brackets ****
+
+      num.toFixed(2) appears a likey method to round (floaty ill-defined numbery things) to display as 2 decimal places. At least as long as no concatenation provoked type changing happens!
+*/
+
+/* Pseudocode:
+
+Find the number of entries in the dataset, this is the number of months which can be asigned to a variable for use in the output and calculations.
+
+Iterate over the array, adding the P/L amounts to a running total which will gbe the net P/L for the whole period. (May be an array method for this?)
+
+Calculate the values for delta, starting with first month to second month, dated as second month. Store these values for later analysis.
+
+Calculate average delta. Numerator is P/L total *** minus first month which is not in the average! (Or total of deltas, but not raw total P/L)
+
+Search for highest and lowest deltas (or just order the array and take start and finish?)
+
+Print everything to the console.
