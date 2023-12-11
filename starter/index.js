@@ -128,6 +128,8 @@ Calculate average delta. Numerator is P/L total *** minus first month which is n
 
 Search for highest and lowest deltas (or just order the array and take start and finish?)
 
+There's going to be fun with array indexing...
+
 Print everything to the console.
 */
 
@@ -142,6 +144,47 @@ variables neeeded:
   greatest negative delta
   average delta
 loop variables
-  current and previous data points.
+  current and previous data points. (Array indexing.)
 
 */
+
+// Experimental code here: 
+
+/*https://www.freecodecamp.org/news/how-to-add-numbers-in-javascript-arrays/
+
+const myNums=[1,2,3,4,-5];
+
+const myfinance=
+
+let sum = 0;
+
+finances.forEach( num => {
+  sum += num;
+})
+
+console.log(sum)
+
+// Works well on pure numbers, has trouble with strings! How do I split the numerical data out of array? Returning tuples, need to drop first element
+*/
+
+// let sum = 0;
+// finances.forEach( num => {
+//   sum += num;
+//   console.log(finances[0][1]); // read from nested arrays
+// })
+
+// Go for the conceptually easier for loop
+
+// create an array
+// let myNums = [1, 2, 3, 4, 5];
+
+// create a variable for the sum and initialize it
+let periodNetPL = 0;
+
+// iterate over each item in the array
+for (let i = 0; i < finances.length; i++ ) {
+  periodNetPL += finances[i][1];
+  console.log(periodNetPL, i+1) 
+}
+
+
