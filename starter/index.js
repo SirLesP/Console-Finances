@@ -122,10 +122,26 @@ Find the number of entries in the dataset, this is the number of months which ca
 
 Iterate over the array, adding the P/L amounts to a running total which will gbe the net P/L for the whole period. (May be an array method for this?)
 
-Calculate the values for delta, starting with first month to second month, dated as second month. Store these values for later analysis.
+Calculate the values for delta, starting with first month to second month, dated as second month. Store these values for later analysis. (Or use Laura's repeated comparison method?)
 
 Calculate average delta. Numerator is P/L total *** minus first month which is not in the average! (Or total of deltas, but not raw total P/L)
 
 Search for highest and lowest deltas (or just order the array and take start and finish?)
 
 Print everything to the console.
+*/
+
+/* Ideas from Laura's pseudocode:
+
+Running on a couple of different principles; one iteration over the array, creating a rolling total of P/L and also looking for greatest positive and negative deltas. For deltas need current and previous, or current and next.
+
+variables neeeded:
+  total number of months
+  rolling total of profits
+  greatest positive delta
+  greatest negative delta
+  average delta
+loop variables
+  current and previous data points.
+
+*/
