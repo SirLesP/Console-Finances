@@ -1,4 +1,4 @@
-# Coonsole Finances
+# Console Finances
 ## Bootcamp challenge 4
 
 This is primarily an excercise in using and traversing arrays in JavaScript, with conditionals to select values that meet certain criteria.
