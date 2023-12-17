@@ -86,3 +86,119 @@ var finances = [
   ['Jan-2017', 138230],
   ['Feb-2017', 671099],
 ];
+
+/* Outline:
+
+The given dataset is provided as a nested array of key-value pairs comprising a text string and a number. The text string is a date in the form "Mon-Year" and the number, assumed to be an integer being the monthly profit or loss. Profit positive, losses negative.
+
+We are required to find: 
+  The total number of months in the given dataset.
+    This will be given by the length of the array.
+  The net total of P/L over the entire period.
+    A quick glance shows the full total of all the numeric fields gives this.
+  
+  The average of changes in the P/L amounts over the whole period.
+    A two stage process suggested in the README:
+      Track the changes in P/L from month to month (delta).
+      Find the greatest increase in P/L (month period and amount) over the period.
+      Find the greatest decrease .........................................
+      Find the average of those changes (Total of deltas/(Number of months - 1)). Note there is a boundary condition, the first value has no known delta as we don't have the previous month's figure, hence the -1 above.
+      
+Console output is acceptable, that's all the given index.html would provide!
+  It should look something like the following:
+
+      Financial Analysis
+      ------------------
+      Total Months:
+      Total P/L: £
+      Average Change: 
+      Greatest Increase in P/L: 'date0 string' £ **** Do not use brackets ****
+      Greatest Decrease in P/L: 'date0 string' £ **** Do not use brackets ****
+
+      num.toFixed(2) appears a likey method to round (floaty ill-defined numbery things) to display as 2 decimal places. At least as long as no concatenation provoked type changing happens!
+*/
+
+/* Pseudocode:
+
+The number of entries in the dataset - array length - is the number of monthly periods for the required output and calculations.
+
+Iterate over the array, adding the P/L amounts to a running total which will gbe the net P/L for the whole period. 
+
+Iterate over the array, calculating the deltas and their sum. Use comparison operators to find and store the minimun and maximum values with the month period.
+
+Calculate average delta. Total delta over number of deltas. Note boundary condition, number of deltas is one less than length of array.
+
+
+Print everything to the console.
+*/
+
+// Sharp idea - output a comma-separated list to load into spreadsheet for sanity check. Also start using the nice template output system. Well good, helped find boundary errors.
+
+/* Ideas from Laura's pseudocode:
+
+variables neeeded:
+  total number of months   ** Can be found from array length
+  rolling total of profits ** Doesn't appear to be used for anything.
+  greatest positive delta  ** Because these need to be linked with the month,
+  greatest negative delta  ** an iterative approach is probably OK.
+  average delta            ** Watch for that boundary problem.
+loop variables
+  current and previous data points. (Array indexing.)
+
+*/
+
+// *** Start of code ***
+
+// delta = current month P/L less previous month P/L
+
+let periodNetPL = 0;
+let delta = 0;
+let sigmaDelta = 0;
+let maxDelta = 0;
+let minDelta = 0;
+let maxDeltaMonth = "";
+let minDeltaMonth = "";
+let avgSigmaDelta = 0;
+
+// simple loop here to calculate sum of P/L for all periods
+
+for (var i = 0; i < finances.length; i ++ ) {
+  periodNetPL += finances[i][1]
+}
+
+// Loop to find total delta (for use in average) plus maximum and minimum for delta and the months in which they occur. NB no protection against duplicate values.
+
+
+// finances[i][1] - finances[i-1][1] works as we start from item one!
+
+for (let i = 1; i < finances.length; i++ ) {
+
+  delta = finances[i][1] - finances[i-1][1];
+    sigmaDelta += delta;
+
+    if (maxDelta < delta) {
+      maxDelta = delta;
+      maxDeltaMonth = finances[i][0];
+    }
+
+    if (minDelta > delta) {
+      minDelta = delta;
+      minDeltaMonth = finances[i][0];
+    }
+}
+
+avgSigmaDelta = sigmaDelta / (finances.length -1)
+
+// Output 
+
+console.log("Results table \n -----------")
+console.log(`Number of months in dataset ${finances.length}`)
+console.log(`Overall P/L ${periodNetPL.toLocaleString("en-gb", {style: "currency", "currency": "GBP", currencySign: "accounting"})}`)
+console.log(`Average change in monthly P/L ${avgSigmaDelta.toLocaleString("en-gb", {style:"currency", currency:"GBP", currencySign: "accounting"})}`)
+console.log(`Greatest monthly increase in P/L ${maxDelta.toLocaleString("en-gb", {style:"currency", currency:"GBP"})} in ${maxDeltaMonth}`)
+console.log(`Greatest monthly decrease in P/L ${minDelta.toLocaleString("en-gb", {style:"currency", currency:"GBP", currencySign: "accounting"})} in ${minDeltaMonth}`)
+
+
+
+
+

@@ -1,97 +1,43 @@
-# Unit 4 Challenge: Console Finances
+# Coonsole Finances
+## Bootcamp challenge 4
 
-## Overview
+This is primarily an excercise in using and traversing arrays in JavaScript, with conditionals to select values that meet certain criteria.
 
-In this challenge, you'll be using the concepts you've learned to complete the required activity. This activity presents a real-world situation in which your newfound JavaScript skills will come in handy. You are tasked with creating code for analyzing the financial records of a company. You have been provided with a financial dataset in the `starter/index.js` file.
+While writing and testing it I did export the data to a .csv file - included n the repository - and made a spreadsheet to check the results of this program against.
 
-## Instructions
+## Installation and Usage
 
-1. Create a new GitHub repo called `Console-Finances`. Then, clone it to your computer.
+The main program is written in JS and simply results in console output when run. It can be directly run using (for example) node.js via the Code Runner extension for VS Code.
 
-2. Copy the starter files in your local git repository.
+If this is not available, opening the index.html page for this challenge and then using the browser's Inspector to open the console allows the results to be viewed.
 
-You have been given a dataset composed of arrays with two fields, Date and Profit/Losses.
+The GitHub repository for this project is at https://github.com/SirLesP/Console-Finances
 
-Your task is to write JavaScript code that analyzes the records to calculate each of the following:
+The index.html page is published at https://sirlesp.github.io/console-finances/
 
-* The total number of months included in the dataset.
+The program does not take external input, as the provided .js file includes the dataset as an array variable containing key:value pairs for accounting months and the P/L figures for them.
 
-* The net total amount of Profit/Losses over the entire period.
+Program output screenshot:
+![Alt text](image.png)
 
-* The average of the **changes** in Profit/Losses over the entire period.
-  * You will need to track what the total change in Profit/Losses are from month to month and then find the average.
-  * (`Total/(Number of months - 1)`)
+## Enhancements
 
-* The greatest increase in Profit/Losses (date and amount) over the entire period.
+I have changed the output format, using the en-gb locale to improve the readability of the longer numbers in the output, and apply the accounting convention of placing negative numbers in brackets in documents.
 
-* The greatest decrease in Profit/Losses (date and amount) over the entire period.
+A rewrite using functions could be (slightly) cleaner code. There are array methods for summing the contents of all fields in an array, but they are above my current level of competence so I have not used them.
 
-When you open your code in the browser your resulting analysis should look similar to the following:
 
-  ```text
-  Financial Analysis 
-  ----------------
-  Total Months: 86
-  Total: $38382578
-  Average Change: -2315.12
-  Greatest Increase in Profits/Losses: Feb-2012 ($1926159)
-  Greatest Decrease in Profits/Losses: Sep-2013 ($-2196167)
-  ```
 
-Your final code should print the analysis to the console.
+## Learning outcomes
 
-**Hints:**
+I'm more confident now with array operations, and more alert to off-by-one errors.
 
-* You will need to do some research on your own for this project!
+I've also found some useful tools for formatting output neatly.
 
-* Remember, in order to combine strings and variables in the console you will need to use **concatenation**.
+## License
 
-* How do you only print to the nearest 100th in JavaScript?
-
-## Grading Requirements
-
-This homework is graded based on the following criteria:
-
-### Technical Acceptance Criteria: 40%
-
-* Satisfies all of the above acceptance criteria.
-
-### Deployment: 32%
-
-* Application deployed at live URL.
-
-* Application loads with no errors.
-
-* Application GitHub URL submitted.
-
-* GitHub repository contains application code.
-
-### Repository Quality: 23%
-
-* Repository has a unique name.
-
-* Repository follows best practices for file structure and naming conventions.
-
-* Repository follows best practices for variable naming conventions, indentation, quality comments, etc.
-
-* Repository contains multiple descriptive commit messages.
-
-* Repository contains quality README file with description, screenshot, and link to deployed application.
-
-### Application Quality: 5%
-
-* Application resembles the mock-up functionality provided in the Challenge instructions.
-
-## Review
-
-You are required to submit BOTH of the following for review:
-
-* The URL of the deployed application.
-
-* The URL of the GitHub repository that contains your code. Give the repository a unique name and include a README file that describes the project.
-
----
+This excercise does not have a license.
 
 ## Copyright
 
-© 2023 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.
+I make no copyright claim for the code, but I do for this README.md document and my comments within the code.
