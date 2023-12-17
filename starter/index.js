@@ -195,27 +195,54 @@ for (let i = 0; i < finances.length; i++ ) {
 let periodNetPL = 0;
 let delta = 0;
 let sigmaDelta = 0;
-//loop here 
+let maxDelta = 0;
+let minDelta = 0;
+let maxDeltaMonth = ""
+let minDeltaMonth = ""
+
+// simple loop here to calculate sum of P/L for all periods
+
+for (var i = 0; i < finances.length; i ++ ) {
+  periodNetPL += finances[i][1]
+}
+
+// console.log( i  , periodNetPL) // Test code
+
+// Loop to find total delta (for use in average) plus maximum and minimum for delta and the months in which they occur. NB no protection against duplicate values
+
 
 // finances[i][1] - finances[i-1][1] // works as we start from item one!
 // log date finances[i][0] and delta 
 
 for (let i = 1; i < finances.length; i++ ) {
-  periodNetPL += finances[i][1];
+
   delta = finances[i][1] - finances[i-1][1];
     sigmaDelta += delta;
 
-  console.log(i + ", " + finances[i][0] + ", " + finances[i][1] + ", " + finances[i-1][1] + ", " + delta );
-  console.log(`Differences total ${sigmaDelta}`) 
+    if (maxDelta < delta) {
+      maxDelta = delta;
+      maxDeltaMonth = finances[i][0];
+    }
+
+    if (minDelta > delta) {
+      minDelta = delta;
+      minDeltaMonth = finances[i][0];
+    }
+
+
+
+// Find max/min delta and location/date Probably call another function.
+  // console.log(i + ", " + finances[i][0] + ", " + finances[i][1] + ", " + finances[i-1][1] + ", " + delta );
+  // console.log(`Differences total ${sigmaDelta}`) 
 }
 
-
-// Looking good but not formally sanity checked
+console.log(maxDelta,maxDeltaMonth)
+console.log(minDelta,minDeltaMonth)
 
 // Provisional output 
 
 console.log("Results table \n -----------")
-console.log(`Overall ${periodNetPL+867884}`) //error here as misses january off - don't use value from loop here with start at one change variable name
+console.log(`Overall ${periodNetPL}`) //error here as misses january off - don't use value from loop here with start at one change variable name
 console.log("Number of months will be array length " + finances.length)
 console.log(`Average delta ${(sigmaDelta / (finances.length -1)).toFixed(2)}`)
 
@@ -257,3 +284,11 @@ console.log(maxPos)
 // console.log(finances[maxPos]) // Or redo the delta calculation here
 
 // accidentally searched for highest sales, not delta presumably have to run over sigmaDelta.... sigmaDelta isn't stored in the array so need to test during iteration and record until max/min value and position logged.
+
+// let array = [ ["Ignore ",1], ["ignore ", 2]] ;  // Rather ahead of my current knowledge
+
+// let result = array.reduce((a, b) => {
+//   return a + b;
+// }, 10);
+
+// console.log("Bong! " + result);
