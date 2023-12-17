@@ -136,13 +136,12 @@ Print everything to the console.
 
 /* Ideas from Laura's pseudocode:
 
-
 variables neeeded:
   total number of months   ** Can be found from array length
   rolling total of profits ** Doesn't appear to be used for anything.
   greatest positive delta  ** Because these need to be linked with the month,
   greatest negative delta  ** an iterative approach is probably OK.
-  average delta
+  average delta            ** Watch for that boundary problem.
 loop variables
   current and previous data points. (Array indexing.)
 
@@ -157,8 +156,9 @@ let delta = 0;
 let sigmaDelta = 0;
 let maxDelta = 0;
 let minDelta = 0;
-let maxDeltaMonth = ""
-let minDeltaMonth = ""
+let maxDeltaMonth = "";
+let minDeltaMonth = "";
+let avgSigmaDelta = 0;
 
 // simple loop here to calculate sum of P/L for all periods
 
@@ -187,17 +187,17 @@ for (let i = 1; i < finances.length; i++ ) {
     }
 }
 
-// console.log(maxDelta,maxDeltaMonth)
-// console.log(minDelta,minDeltaMonth)
+avgSigmaDelta = sigmaDelta / (finances.length -1)
 
 // Output 
 
 console.log("Results table \n -----------")
 console.log(`Number of months in dataset ${finances.length}`)
-console.log(`Overall P/L £${periodNetPL}`)
-console.log(`Average change in monthly P/L ${(sigmaDelta / (finances.length -1)).toFixed(2)}`)
-console.log(`Greatest monthly increase in P/L £${maxDelta} in ${maxDeltaMonth}`)
-console.log(`Greatest monthly decrease in P/L £${minDelta} in ${minDeltaMonth}`)
+console.log(`Overall P/L ${periodNetPL.toLocaleString("en-gb", {style: "currency", "currency": "GBP", currencySign: "accounting"})}`)
+console.log(`Average change in monthly P/L ${avgSigmaDelta.toLocaleString("en-gb", {style:"currency", currency:"GBP", currencySign: "accounting"})}`)
+console.log(`Greatest monthly increase in P/L ${maxDelta.toLocaleString("en-gb", {style:"currency", currency:"GBP"})} in ${maxDeltaMonth}`)
+console.log(`Greatest monthly decrease in P/L ${minDelta.toLocaleString("en-gb", {style:"currency", currency:"GBP", currencySign: "accounting"})} in ${minDeltaMonth}`)
+
 
 
 
