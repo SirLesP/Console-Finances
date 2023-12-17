@@ -120,7 +120,7 @@ We are required to find:
 
 Find the number of entries in the dataset, this is the number of months which can be asigned to a variable for use in the output and calculations.
 
-Iterate over the array, adding the P/L amounts to a running total which will gbe the net P/L for the whole period. (May be an array method for this?)
+Iterate over the array, adding the P/L amounts to a running total which will gbe the net P/L for the whole period. (No, use an array method for this!)
 
 Calculate the values for delta, starting with first month to second month, dated as second month. Store these values for later analysis. (Or use Laura's repeated comparison method?)
 
@@ -138,10 +138,10 @@ Print everything to the console.
 Running on a couple of different principles; one iteration over the array, creating a rolling total of P/L and also looking for greatest positive and negative deltas. For deltas need current and previous, or current and next.
 
 variables neeeded:
-  total number of months
-  rolling total of profits
-  greatest positive delta
-  greatest negative delta
+  total number of months   ** Can be found from array length
+  rolling total of profits ** Doesn't appear to be used for anything.
+  greatest positive delta  ** Because these need to be linked with the month,
+  greatest negative delta  ** an iterative approach is probably OK.
   average delta
 loop variables
   current and previous data points. (Array indexing.)
@@ -179,7 +179,7 @@ console.log(sum)
 // let myNums = [1, 2, 3, 4, 5];
 
 // create a variable for the sum and initialize it
-let periodNetPL = 0;
+
 
 /* iterate over each item in the array and add to summary variable show index to check function
 for (let i = 0; i < finances.length; i++ ) {
@@ -192,8 +192,9 @@ for (let i = 0; i < finances.length; i++ ) {
 
 // delta = current month P/L less previous month P/L
 
+let periodNetPL = 0;
 let delta = 0;
-
+let sigmaDelta = 0;
 //loop here 
 
 // finances[i][1] - finances[i-1][1] // works as we start from item one!
@@ -201,8 +202,11 @@ let delta = 0;
 
 for (let i = 1; i < finances.length; i++ ) {
   periodNetPL += finances[i][1];
-  delta = finances[i][1] - finances[i-1][1]
-  console.log(i + ", " + finances[i][0] + ", " + finances[i][1] + ", " + finances[i-1][1] + ", " + delta ) 
+  delta = finances[i][1] - finances[i-1][1];
+    sigmaDelta += delta;
+
+  console.log(i + ", " + finances[i][0] + ", " + finances[i][1] + ", " + finances[i-1][1] + ", " + delta );
+  console.log(`Differences total ${sigmaDelta}`) 
 }
 
 
@@ -211,9 +215,45 @@ for (let i = 1; i < finances.length; i++ ) {
 // Provisional output 
 
 console.log("Results table \n -----------")
-console.log("Overall " + periodNetPL) //error here as misses january off - don't use value from loop here with start at one change variable name
+console.log(`Overall ${periodNetPL+867884}`) //error here as misses january off - don't use value from loop here with start at one change variable name
 console.log("Number of months will be array length " + finances.length)
-
+console.log(`Average delta ${(sigmaDelta / (finances.length -1)).toFixed(2)}`)
 
 // Sharp idea - output a comma-separated list to load into spreadsheet for sanity check. Also start using the nice template output system. Well good, helped find boundary errors.
 
+// Pinch the array traversal for min/max from W3 schools? https://www.w3schools.com/js/tryit.asp?filename=tryjs_array_sort_max Would then have to go back searching for the value. Really need one that returns the index!
+
+// Based on https://stackoverflow.com/questions/11301438/return-index-of-greatest-value-in-an-array
+
+
+const testArray=[["junk", 1],["trash",3],
+["trash",15],["trash",9],["trash",4]]
+
+
+function indexOfMax(arr) {
+  // if (arr.length === 0) {
+  //     return -1;
+  // }
+
+  var max = arr[0][1];
+  var maxIndex = 0;
+
+  for (var i = 1; i < arr.length; i++) {
+      if (arr[i][1] > max) { //need to change to calc for delta 
+          maxIndex = i;
+          max = arr[i][1];
+      }
+  }
+
+  return {index:maxIndex, value:arr[maxIndex][1]}; // Return a data object with the cash figure and the month or the array position.
+}
+
+
+
+let maxPos = indexOfMax(finances)
+
+console.log(maxPos)
+
+// console.log(finances[maxPos]) // Or redo the delta calculation here
+
+// accidentally searched for highest sales, not delta presumably have to run over sigmaDelta.... sigmaDelta isn't stored in the array so need to test during iteration and record until max/min value and position logged.
